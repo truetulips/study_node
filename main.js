@@ -1,6 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
+var menu_tree = ['HTML','CSS','JavaScript']
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
@@ -21,9 +22,9 @@ var app = http.createServer(function(request,response){
                 <body>
                     <h1><a href="/">WEB</a></h1>
                     <ul>
-                        <li><a href="/?id=HTML">HTML</a></li>
-                        <li><a href="/?id=CSS">CSS</a></li>
-                        <li><a href="/?id=JavaScript">JavaScript</a></li>
+                        <li><a href="/?id=${menu_tree[0]}">${menu_tree[0]}</a></li>
+                        <li><a href="/?id=${menu_tree[1]}">${menu_tree[1]}</a></li>
+                        <li><a href="/?id=${menu_tree[2]}">${menu_tree[2]}</a></li>
                     </ul>
                     <h2>${title}</h2>
                     <p>${description}</p>
@@ -46,9 +47,9 @@ var app = http.createServer(function(request,response){
                 <body>
                     <h1><a href="/">WEB</a></h1>
                     <ul>
-                        <li><a href="/?id=HTML">HTML</a></li>
-                        <li><a href="/?id=CSS">CSS</a></li>
-                        <li><a href="/?id=JavaScript">JavaScript</a></li>
+                        <li><a href="/?id=${menu_tree[0]}">${menu_tree[0]}</a></li>
+                        <li><a href="/?id=${menu_tree[1]}">${menu_tree[1]}</a></li>
+                        <li><a href="/?id=${menu_tree[2]}">${menu_tree[2]}</a></li>
                     </ul>
                     <h2>${title}</h2>
                     <p>${description}</p>
