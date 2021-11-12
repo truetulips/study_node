@@ -2,6 +2,13 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var menu_tree = ['HTML','CSS','JavaScript']
+var nav = '<ul>';
+var i = 0;
+while(i < menu_tree.length){
+    nav = nav + `<li><a href="/?id=${menu_tree[i]}">${menu_tree[i]}</a></li>`;
+    i = i + 1;
+}
+nav = nav + '</ul>';
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
@@ -9,8 +16,7 @@ var app = http.createServer(function(request,response){
     var pathname = url.parse(_url, true).pathname;   
     if (pathname === '/'){
         if(queryData.id === undefined){            
-            fs.readFile(`${queryData.id}`, 'utf8', function(err, description){
-                var title = 'welcome';
+                var title = 'Welcome';
                 var description = 'Hello, Node.js';
                 var template = `
                 <!doctype html>
@@ -21,11 +27,7 @@ var app = http.createServer(function(request,response){
                 </head>
                 <body>
                     <h1><a href="/">WEB</a></h1>
-                    <ul>
-                        <li><a href="/?id=${menu_tree[0]}">${menu_tree[0]}</a></li>
-                        <li><a href="/?id=${menu_tree[1]}">${menu_tree[1]}</a></li>
-                        <li><a href="/?id=${menu_tree[2]}">${menu_tree[2]}</a></li>
-                    </ul>
+                    ${nav}
                     <h2>${title}</h2>
                     <p>${description}</p>
                 </body>
@@ -33,7 +35,6 @@ var app = http.createServer(function(request,response){
                 `;
                 response.writeHead(200);
                 response.end(template); 
-            });
         } else {
             fs.readFile(`${queryData.id}`, 'utf8', function(err, description){
                 var title = queryData.id;
@@ -46,11 +47,7 @@ var app = http.createServer(function(request,response){
                 </head>
                 <body>
                     <h1><a href="/">WEB</a></h1>
-                    <ul>
-                        <li><a href="/?id=${menu_tree[0]}">${menu_tree[0]}</a></li>
-                        <li><a href="/?id=${menu_tree[1]}">${menu_tree[1]}</a></li>
-                        <li><a href="/?id=${menu_tree[2]}">${menu_tree[2]}</a></li>
-                    </ul>
+                    ${nav}
                     <h2>${title}</h2>
                     <p>${description}</p>
                 </body>
