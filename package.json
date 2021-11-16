@@ -1,6 +1,28 @@
 {
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^2.0.14"
-  }
+    "nodemon": "^2.0.14",
+    "sanitize-html": "^2.5.3"
+  },
+  "name": "study_node",
+  "description": "",
+  "version": "1.0.0",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truetulips/study_node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/truetulips/study_node/issues"
+  },
+  "homepage": "https://github.com/truetulips/study_node#readme",
+  "devDependencies": {}
 }
