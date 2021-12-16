@@ -4,7 +4,7 @@ var url = require('url');
 var qs = require('querystring');
 var template = require('./lib/template.js');
 var path = require('path');
-var sanitizeHtml = require('sanitize-html');
+var sanitizeHtml = require('sanitize-html'); //기본 보안처리
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
@@ -17,7 +17,7 @@ var app = http.createServer(function(request,response){
                 var description = 'Hello, Node.js study';
                 var nav = template.List(menu_tree);
                 var html = template.HTML(title, nav, `<h2>${title}</h2>${description}`,
-                `<ul><li><a href="/create">create</a></li></ul>`,'');
+                `<ul><li class="btn_li"><a href="/create" class="btn">작성</a></li></ul>`,'');
                 response.writeHead(200);
                 response.end(html); 
             });
@@ -31,12 +31,12 @@ var app = http.createServer(function(request,response){
                     var nav = template.List(menu_tree);
                     var html = template.HTML(title, nav, `<h2>${title}</h2>${sanitizeDescription}`,
                     `<ul>
-                        <li>
-                            <a href="/create">create</a>
-                            <a href="/update?id=${sanitizeTitle}">update</a>
+                        <li class="btn_li">
+                            <a href="/create" class="btn">작성</a>
+                            <a href="/update?id=${sanitizeTitle}" class="btn">수정</a>
                             <form action="/delete_process" method="post">
                                 <input type="hidden" name="id" value="${sanitizeTitle}">
-                                <input type="submit" value="delete">
+                                <input type="submit" value="삭제">
                             </form>
                         </li>
                     </ul>`,'');
@@ -49,12 +49,12 @@ var app = http.createServer(function(request,response){
         fs.readdir('./data', function(error, menu_tree){           
             var title = 'create';
             var nav = template.List(menu_tree);
-            var html = template.HTML(title, nav, `
+            var html = template.HTML(title, nav, `                
                 <h2>${title}</h2>
                 <form action="/create_process" method="post">
-                    <p><input type="text" name="title" placeholder="title"></p>
-                    <p><textarea name="description" placeholder="description"></textarea></p>
-                    <p><input type="submit"></p>
+                    <p><input type="text" name="title" placeholder="제목을 작성하세요"></p>
+                    <p><textarea name="description" placeholder="이곳에 내용을 넣으세요."></textarea></p>
+                    <p><input type="submit" value="등록"></p>
                 </form>
             `,'');
             response.writeHead(200);
@@ -86,9 +86,9 @@ var app = http.createServer(function(request,response){
                     <input type="hidden" name="id"  value="${title}">
                     <p><input type="text" name="title" placeholder="title" value="${title}"></p>
                     <p><textarea name="description" placeholder="description">${description}</textarea></p>
-                    <p><input type="submit"></p>
+                    <p><input type="submit" value="등록"></p>
                 </form>`,
-                `<ul><li><a href="/create">create</a> <a href="/update?id=${title}">update</a></li></ul>`);
+                `<ul><li class="btn_li"><a href="/create" class="btn">작성</a> <a href="/update?id=${title}" class="btn">수정</a></li></ul>`);
                 response.writeHead(200);
                 response.end(html); 
             });
